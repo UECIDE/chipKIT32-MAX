@@ -576,6 +576,79 @@ typedef struct {
 	volatile p32_regset pmpStat;
 } p32_pmp;
 
+/* ------------------------------------------------------------ */
+/*          DMA Controllers                                     */
+/* ------------------------------------------------------------ */
+
+typedef struct {
+    volatile p32_regset dchcon;
+    volatile p32_regset dchecon;
+    volatile p32_regset dchint;
+    volatile p32_regset dchssa;
+    volatile p32_regset dchdsa;
+    volatile p32_regset dchssiz;
+    volatile p32_regset dchdsiz;
+    volatile p32_regset dchsptr;
+    volatile p32_regset dchdptr;
+    volatile p32_regset dchcsiz;
+    volatile p32_regset dchcptr;
+    volatile p32_regset dchdat;
+} p32_dch;
+
+#define DMA_CON_ON          (1 << 15)
+#define DMA_CON_SUSPEND     (1 << 12)
+#define DMA_CON_DMABUSY     (1 << 11)
+
+#define DMA_STAT_RDWR       (1 << 3)
+#define DMA_STAT_DMACH(X)   ((X) & 0x07)
+
+#define DCRC_CON_BYTO(X)    (((X) & 0x03) << 28)
+#define DCRC_CON_WBO        (1 << 27)
+#define DCRC_CON_BITO       (1 << 24)
+#define DCRC_CON_PLEN(X)    (((X) & 0x1F) << 8)
+#define DCRC_CON_CRCEN      (1 << 7)
+#define DCRC_CON_CRCAPP     (1 << 6)
+#define DCRC_CON_CRCTYP     (1 << 5)
+#define DCRC_CON_CRCCH(X)   ((X) & 0x07)
+
+#define DCH_CON_CHPIGN(X)   (((X) & 0xFF) << 24)
+#define DCH_CON_CHBUSY      (1 << 15)
+#define DCH_CON_CHPIGNEN    (1 << 13)
+#define DCH_CON_CHPATLEN    (1 << 11)
+#define DCH_CON_CHCHNS      (1 << 8)
+#define DCH_CON_CHEN        (1 << 7)
+#define DCH_CON_CHAED       (1 << 6)
+#define DCH_CON_CHCHN       (1 << 5)
+#define DCH_CON_CHAEN       (1 << 4)
+#define DCH_CON_CHEDET      (1 << 2)
+#define DCH_CON_CHPRI(X)    ((X) & 0x03)
+
+#define DCH_ECON_CHAIRQ(X)  (((X) & 0xFF) << 16)
+#define DCH_ECON_CHSIRQ(X)  (((X) & 0xFF) << 8)
+#define DCH_ECON_CFORCE     (1 << 7)
+#define DCH_ECON_CABORT     (1 << 6)
+#define DCH_ECON_PATEN      (1 << 5)
+#define DCH_ECON_SIRQEN     (1 << 4)
+#define DCH_ECON_AIRQEN     (1 << 3)
+
+#define DCH_INT_CHSDIE      (1 << 23)
+#define DCH_INT_CHSHIE      (1 << 22)
+#define DCH_INT_CHDDIE      (1 << 21)
+#define DCH_INT_CHDHIE      (1 << 20)
+#define DCH_INT_CHBCIE      (1 << 19)
+#define DCH_INT_CHCCIE      (1 << 18)
+#define DCH_INT_CHTAIE      (1 << 17)
+#define DCH_INT_CHERIE      (1 << 16)
+#define DCH_INT_CHSDIF      (1 << 7)
+#define DCH_INT_CHSHIF      (1 << 6)
+#define DCH_INT_CHDDIF      (1 << 5)
+#define DCH_INT_CHDHIF      (1 << 4)
+#define DCH_INT_CHBCIF      (1 << 3)
+#define DCH_INT_CHCCIF      (1 << 2)
+#define DCH_INT_CHTAIF      (1 << 1)
+#define DCH_INT_CHERIF      (1 << 0)
+
+#define __DMA __attribute__((coherent))
 
 /* ------------------------------------------------------------ */
 /*			Peripheral Pin Select Output Declarations			*/

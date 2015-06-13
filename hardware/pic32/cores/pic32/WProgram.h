@@ -20,6 +20,8 @@
 	#include "HardwareSerial.h"
 #endif
 
+#include "dma.h"
+
 //Compatability changes
 #if defined(__PIC32MX__)
   #if defined F
